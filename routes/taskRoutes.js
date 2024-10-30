@@ -16,6 +16,7 @@ router.get('/', async (req, res) => {
 // Create a new task
 router.post('/', async (req, res) => {
   const task = new Task(req.body);
+  console.log("Incoming Request Body:", task);
   try {
     const newTask = await task.save();
     res.status(201).json(newTask);
