@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5000;
 // app.use(cors());
 const corsOptions = {
   origin: 'https://tasks-assign.netlify.app', // Correct origin without trailing slash
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], // Specify allowed methods
   credentials: true, // If you need to send cookies or authorization headers
 };
 
