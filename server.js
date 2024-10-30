@@ -9,9 +9,13 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 // app.use(cors());
-app.use(cors({
-  origin: 'https://tasks-assign.netlify.app', // Change this to your frontend URL
-}));
+const corsOptions = {
+  origin: 'https://tasks-assign.netlify.app', // Correct origin without trailing slash
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods
+  credentials: true, // If you need to send cookies or authorization headers
+};
+
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 
