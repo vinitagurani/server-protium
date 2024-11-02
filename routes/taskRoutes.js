@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 // Create a new task
 router.post('/', async (req, res) => {
   const task = new Task(req.body);
-  console.log("Incoming Request Body:", task);
+  // console.log("Incoming Request Body:", task);
   try {
     const newTask = await task.save();
     res.status(201).json(newTask);
@@ -163,6 +163,26 @@ router.delete('/:taskId/comments/:commentId', async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
+
+// to assign tasks
+router.patch('/:id/assign', async (req, res) => {
+  try {
+    const { id } = req.params; // Get task ID from params
+    const { assignedTo } = req.body; // Get assignedTo from the request body
+    const updatedTask = await Task.findByIdAndUpdate(
+      id,
+      { assignedTo },
+      { new: true }
+    );
+    if (!updatedTask) {
+      return res.status(404).json({ message: 'Task not found' });
+    }
+    res.status(200).json(updatedTask);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to assign task', error });
+  }
+});
+
 
 
 
